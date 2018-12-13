@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include <vector>
 #include <time.h>
 
 using namespace std;
@@ -84,18 +85,40 @@ class Unicorn : public Monster {
 main() {
     srand(time(NULL));
 
-    Monster *r = new Robot();
-    Monster *u = new Unicorn();
+    vector<Monster *> monsters;
+    vector<Monster*>::iterator iter;
 
-    while(true) {
-        if (r->attacks(u)) {
-	    std::cout << "The " << r->get_name() << " wins the battle!" << std::endl;
-	    break;
-        }
-        if (u->attacks(r)) {
-	    std::cout << "The " << u->get_name() << " wins the battle!" << std::endl;
-	    break;
-        }
-        std::cout << std::endl;
+    monsters.push_back(new Unicorn());
+    monsters.push_back(new Unicorn());
+
+    // loop through all attackers
+    while(monsters.size() > 1) {
+	    for(iter = monsters.begin(); iter != monsters.end(); iter++) {
+		    Monster *defender = *(monsters.begin());
+		    Monster *attacker = *iter;
+
+		    attacker->attacks(defender);
+	    }
+
+	    // find dead things
+	    for(iter = monsters.begin(); iter != monsters.end(); iter++) {
+		    Monster *monster = *iter;
+
+		    if (monster->is_dead()) {
+			    std::cout << "The " << monster->get_name()
+			              << " died!" << std::endl;
+			    monsters.erase(iter);
+		    }
+	    }
+
+	    std::cout << std::endl;
+    }
+
+    if (monsters.size() == 1) {
+	    // print the winner
+	    std::cout << "The " << monsters[0]->get_name()
+	              << " wins the battle!" << std::endl;
+    } else {
+	    std::cout << "There was no winner; mass death occurred" << std::endl;
     }
 }
