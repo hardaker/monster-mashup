@@ -6,7 +6,7 @@
 using namespace std;
 
 class Monster {
- private:
+ protected:
    string name;
    int hp;
    bool dead;
@@ -64,11 +64,32 @@ class Unicorn : public Monster {
 
 };
 
+class Robot : public Monster {
+ public:
+   Robot() : Monster("Robot", 10) {
+   }
+
+   virtual void defends(int damage) {
+       // print what happens
+       std::cout << "You attack the " << name << "'s metal hulk dealing " <<
+           damage << " damage" << std::endl;
+
+       // actually apply the damage
+       this->hp -= damage;
+
+       // oh no, did I die?
+       if (this->hp <= 0) {
+           std::cout << "   ARGGGGG...  it's disfunctional!  You win!" << endl;
+           dead = true;
+       }
+   }
+
+};
 
 main() {
     srand(time(NULL));
 
-    Monster *m = new Unicorn();
+    Monster *m = new Robot();
     while (! m->is_dead()) {
         m->attacks();
         m->defends(5);
