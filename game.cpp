@@ -82,36 +82,53 @@ class Unicorn : public Monster {
 
 };
 
+Monster *create_random_monster() {
+    int number_of_animal_types = 2;
+
+    int random_number = rand() % number_of_animal_types;
+
+    if (random_number == 0) {
+        return new Unicorn();
+    } else if (random_number == 1) {
+        return new Robot();
+    } else {
+        std::cerr << "This should never happen!!!" << std::endl;
+        exit(1);
+    }
+}
+
 main() {
     srand(time(NULL));
 
     vector<Monster *> monsters;
     vector<Monster*>::iterator iter;
 
-    monsters.push_back(new Unicorn());
-    monsters.push_back(new Unicorn());
+    monsters.push_back(create_random_monster());
+    monsters.push_back(create_random_monster());
 
-    // loop through all attackers
+    // keep running the simulation until one wins (or they all die)
     while(monsters.size() > 1) {
-	    for(iter = monsters.begin(); iter != monsters.end(); iter++) {
-		    Monster *defender = *(monsters.begin());
-		    Monster *attacker = *iter;
-
-		    attacker->attacks(defender);
-	    }
-
-	    // find dead things
-	    for(iter = monsters.begin(); iter != monsters.end(); iter++) {
-		    Monster *monster = *iter;
-
-		    if (monster->is_dead()) {
-			    std::cout << "The " << monster->get_name()
-			              << " died!" << std::endl;
-			    monsters.erase(iter);
-		    }
-	    }
-
-	    std::cout << std::endl;
+        // loop through all monsters
+        // have them each attack another random monster
+        for(iter = monsters.begin(); iter != monsters.end(); iter++) {
+            Monster *attacker = *iter;
+            Monster *defender = monsters[rand() % monsters.size()];
+            
+            attacker->attacks(defender);
+        }
+        
+        // find dead things
+        for(iter = monsters.begin(); iter != monsters.end(); iter++) {
+            Monster *monster = *iter;
+            
+            if (monster->is_dead()) {
+                std::cout << "The " << monster->get_name()
+                          << " died!" << std::endl;
+                monsters.erase(iter);
+            }
+        }
+        
+        std::cout << std::endl;
     }
 
     if (monsters.size() == 1) {
