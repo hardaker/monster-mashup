@@ -36,6 +36,7 @@ a place to tinker with function overloading.
 7. Find and fix the bug!
    - There is a bug in the program.  See if you can spot it (hint: you
      actually can be studying the code and reading the output)
+   - Find and fix the *other* bug.  ha ha.
 	 
 # Example Output
 
