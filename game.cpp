@@ -65,13 +65,13 @@ class Monster {
 
 class Robot : public Monster {
  public:
-   Robot() : Monster("Robot", 100, 1) {
+   Robot() : Monster("Robot", 100, 5) {
    }
 };
 
 class Unicorn : public Monster {
  public:
-   Unicorn() : Monster("Unicorn", 30, 5) {
+   Unicorn() : Monster("Unicorn", 30, 20) {
    }
 
    virtual void print_attack(Monster *defender, int damage) {
@@ -118,24 +118,37 @@ main() {
         }
         
         // find dead things
-        for(iter = monsters.begin(); iter != monsters.end(); iter++) {
-            Monster *monster = *iter;
+        bool restart = false;
+        do {
+            restart = false;
+
+            for(iter = monsters.begin(); iter != monsters.end(); iter++) {
+                Monster *monster = *iter;
             
-            if (monster->is_dead()) {
-                std::cout << "The " << monster->get_name()
-                          << " died!" << std::endl;
-                monsters.erase(iter);
+                // If it's dead, remove it
+                if (monster->is_dead()) {
+                    std::cout << "The " << monster->get_name()
+                              << " died!" << std::endl;
+                    monsters.erase(iter);
+                    
+                    // because we removed something from the middle of
+                    // the list, it's no longer safe to continue
+                    // iteration.  Restart instead to see if other
+                    // monsters died too.
+                    restart = true;
+                    break;
+                }
             }
-        }
+        } while (restart);
         
         std::cout << std::endl;
     }
 
     if (monsters.size() == 1) {
-	    // print the winner
-	    std::cout << "The " << monsters[0]->get_name()
-	              << " wins the battle!" << std::endl;
+        // print the winner
+        std::cout << "The " << monsters[0]->get_name()
+                  << " wins the battle!" << std::endl;
     } else {
-	    std::cout << "There was no winner; mass death occurred" << std::endl;
+        std::cout << "There was no winner; mass death occurred" << std::endl;
     }
 }
