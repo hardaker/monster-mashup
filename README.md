@@ -33,5 +33,33 @@ a place to tinker with function overloading.
    - What if a monster did two attacks at once (one claw, and one bite
      maybe)?
 
+7. Find and fix the bug!
+   - There is a bug in the program.  See if you can spot it (hint: you
+     actually can be studying the code and reading the output)
+	 
+# Example Output
 
+```
+The Robot attacks the Robot dealing 5 damage
+   The Robot has 49 hit-points left
+The Unicorn attacks the Robot with death-rainbows and deals 17 pink heart damage
+   The Robot has 32 hit-points left
 
+The Robot attacks the Robot dealing 2 damage
+   The Robot has 30 hit-points left
+The Unicorn attacks the Unicorn with death-rainbows and deals 4 pink heart damage
+   The Unicorn has 18 hit-points left
+
+The Robot attacks the Robot dealing 4 damage
+   The Robot has 26 hit-points left
+The Unicorn attacks the Robot with death-rainbows and deals 4 pink heart damage
+   The Robot has 22 hit-points left
+
+The Robot attacks the Unicorn dealing 3 damage
+   The Unicorn has 15 hit-points left
+The Unicorn attacks the Unicorn with death-rainbows and deals 18 pink heart damage
+   The Unicorn killed the Unicorn!!!
+The Unicorn died!
+
+The Robot wins the battle!
+```
