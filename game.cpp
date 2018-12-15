@@ -8,49 +8,51 @@ using namespace std;
 
 class Monster {
  protected:
-   string name;
-   int hp;
-   int max_damage;
-   bool dead;
+   string m_name;
+   int    m_hp;
+   int    m_max_damage;
+   bool   m_dead;
 
  public:
    Monster(string name, int max_hp, int max_damage) {
-       this->name = name;
-       this->hp = (rand()%max_hp);
-       this->max_damage = max_damage;
-       this->dead = false;
+       // Initialize class variables
+       m_name       = name;
+       m_hp         = (rand()%max_hp); // % is the "mod" operator
+       m_max_damage = max_damage;
+       m_dead       = false;
    }
 
-   string get_name() { return name; };
-   int get_hp() { return hp; }
-   bool is_dead() { return dead; }
+   // accessors
+   string get_name() { return m_name; };
+   int    get_hp()   { return m_hp; }
+   bool   is_dead()  { return m_dead; }
 
    virtual bool take_damage(int damage) {
        // actually apply the damage
-       this->hp -= damage;
+       m_hp -= damage;
 
        // oh no, did I die?
-       if (this->hp <= 0) {
-           dead = true;
+       if (m_hp <= 0) {
+           m_dead = true;
        }
-       return dead;
+       return m_dead;
    }
 
    virtual void print_attack(Monster *defender, int damage) {
-       std::cout << "The " << name << " attacks the "
+       std::cout << "The " << m_name << " attacks the "
                  << defender->get_name() << " dealing "
                  << damage << " damage" << std::endl;
    }
 
    virtual bool attacks(Monster *defender) {
        // create a random damage amount
-       int damage = rand() % this->max_damage + 1;
+       int damage = rand() % m_max_damage + 1;
        bool they_died = defender->take_damage(damage);
 
        // print what happens
        print_attack(defender, damage);
        if (they_died) {
-	       std::cout << "   The " << name << " killed the "
+	       std::cout << "   The " << m_name << " killed the "
 	                 << defender->get_name() << "!!!" << std::endl;
        } else {
 	       std::cout << "   The " << defender->get_name() << " has "
@@ -75,7 +77,7 @@ class Unicorn : public Monster {
    }
 
    virtual void print_attack(Monster *defender, int damage) {
-       std::cout << "The " << name << " attacks the "
+       std::cout << "The " << m_name << " attacks the "
                  << defender->get_name() << " with death-rainbows and deals "
                  << damage << " pink heart damage" << std::endl;
    }
