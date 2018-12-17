@@ -22,7 +22,7 @@ class Monster {
        m_dead       = false;
    }
 
-   // accessors
+   // data accessors
    string get_name() { return m_name; };
    int    get_hp()   { return m_hp; }
    bool   is_dead()  { return m_dead; }
@@ -39,25 +39,27 @@ class Monster {
    }
 
    virtual void print_attack(Monster *defender, int damage) {
-       std::cout << "The " << m_name << " attacks the "
-                 << defender->get_name() << " dealing "
-                 << damage << " damage" << std::endl;
+       cout << "The " << m_name << " attacks the "
+            << defender->get_name() << " dealing "
+            << damage << " damage" << endl;
    }
 
    virtual bool attacks(Monster *defender) {
        // create a random damage amount
        int damage = rand() % m_max_damage + 1;
+
+       // Apply the damage
        bool they_died = defender->take_damage(damage);
 
-       // print what happens
+       // print what happened
        print_attack(defender, damage);
        if (they_died) {
-	       std::cout << "   The " << m_name << " killed the "
-	                 << defender->get_name() << "!!!" << std::endl;
+	       cout << "   The " << m_name << " killed the "
+	            << defender->get_name() << "!!!" << endl;
        } else {
-	       std::cout << "   The " << defender->get_name() << " has "
-	                 << defender->get_hp() << " hit-points left"
-	                 << std::endl;
+	       cout << "   The " << defender->get_name() << " has "
+	            << defender->get_hp() << " hit-points left"
+	            << endl;
 	       
        }
        return they_died;
@@ -67,26 +69,32 @@ class Monster {
 
 class Robot : public Monster {
  public:
+   // A Robot is a Monster with up to 100 hp and up to 5 damage
    Robot() : Monster("Robot", 100, 5) {
    }
 };
 
 class Unicorn : public Monster {
  public:
+   // A Unicorn is a Monster with up to 30 hp and up to 20 damage
    Unicorn() : Monster("Unicorn", 30, 20) {
    }
 
    virtual void print_attack(Monster *defender, int damage) {
-       std::cout << "The " << m_name << " attacks the "
-                 << defender->get_name() << " with death-rainbows and deals "
-                 << damage << " pink heart damage" << std::endl;
+       cout << "The " << m_name << " attacks the "
+            << defender->get_name() << " with death-rainbows and deals "
+            << damage << " pink heart damage" << endl;
    }
 
 };
 
 Monster *create_random_monster() {
+    // Creates a random monster and returns a pointer to it.
+
+    // The number of classes we have to create from
     int number_of_animal_types = 2;
 
+    // returns a number from 0 to (number_of_animal_types-1)
     int random_number = rand() % number_of_animal_types;
 
     if (random_number == 0) {
@@ -94,7 +102,7 @@ Monster *create_random_monster() {
     } else if (random_number == 1) {
         return new Robot();
     } else {
-        std::cerr << "This should never happen!!!" << std::endl;
+        cerr << "This should never happen!!!" << endl;
         exit(1);
     }
 }
@@ -102,9 +110,11 @@ Monster *create_random_monster() {
 main() {
     srand(time(NULL));
 
+    // Define a list of monster pointers
     vector<Monster *> monsters;
     vector<Monster*>::iterator iter;
 
+    // Load the list with new monsters
     monsters.push_back(create_random_monster());
     monsters.push_back(create_random_monster());
 
@@ -124,13 +134,14 @@ main() {
         do {
             restart = false;
 
+            // loop through each monster in the current list
             for(iter = monsters.begin(); iter != monsters.end(); iter++) {
                 Monster *monster = *iter;
             
                 // If it's dead, remove it
                 if (monster->is_dead()) {
-                    std::cout << "The " << monster->get_name()
-                              << " died!" << std::endl;
+                    cout << "The " << monster->get_name()
+                         << " died!" << endl;
                     monsters.erase(iter);
                     
                     // because we removed something from the middle of
@@ -143,14 +154,15 @@ main() {
             }
         } while (restart);
         
-        std::cout << std::endl;
+        cout << endl;
     }
 
     if (monsters.size() == 1) {
-        // print the winner
-        std::cout << "The " << monsters[0]->get_name()
-                  << " wins the battle!" << std::endl;
+        // Only one monster is left!  It wins!
+        cout << "The " << monsters[0]->get_name()
+             << " wins the battle!" << endl;
     } else {
-        std::cout << "There was no winner; mass death occurred" << std::endl;
+        // The last battle resulted in all-death
+        cout << "There was no winner; mass death occurred" << endl;
     }
 }
