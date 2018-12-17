@@ -1,2 +1,2 @@
-game: game.cpp
+monster-mashup: monster-mashup.cpp
 	g++ -o $@ $<

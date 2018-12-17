@@ -1,8 +1,8 @@
 # Monster Mash Code Arena
 
-This simple [monster code](./game.cpp) code base exists only to tinker
-with and learn to create objects in C++ using pointers and to serve as
-a place to tinker with function overloading.
+This simple [monster code](./monster-mashup.cpp) code base exists only
+to tinker with and learn to create objects in C++ using pointers and
+to serve as a place to tinker with function overloading.
 
 # Task ideas
 
