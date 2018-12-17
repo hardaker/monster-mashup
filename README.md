@@ -4,6 +4,30 @@ This simple [monster code](./monster-mashup.cpp) code base exists only
 to tinker with and learn to create objects in C++ using pointers and
 to serve as a place to tinker with function overloading.
 
+## Ways to get the code
+
+### Fork the repository
+
+This is the recommended way to make changes, as you can republish your
+changes to your own github account for others to use.
+
+1. Click the fork button in the upper right-hand corner
+2. Follow the steps to fork it
+3. You'll end up on a new page that looks just like this one.  But
+   it's your account instead of Wes'.
+4. Follow the *Clone steps* steps below
+
+### Clone the repository
+
+1. Click on the green *Clone or download* button, it will show you a
+URL you can use to clone the repository.
+1. In a terminal, type "git clone URL" to get a copy of it onto your
+   system.
+1. Make changes!
+1. Commit the changes using "git add" and "git commit"
+1. If you "Forked" above as recommended, you can "git push" the
+   changes back to your account too.
+
 # Task ideas
 
 1. READ THE CODE!
