@@ -1,3 +1,7 @@
+/* Copyright (C) 2018, Wes Hardaker.  All rights reserved.  Use is
+ * subject to GPL-3 license terms specified in the LICENSE file
+ */ 
+
 #include <iostream>
 #include <stdlib.h>
 #include <string>
