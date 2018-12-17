@@ -7,9 +7,14 @@ a place to tinker with function overloading.
 # Task ideas
 
 1. READ THE CODE!
-   - before doing anything else, make sure you can understand every
+   - Before doing anything else, make sure you can understand every
      line.  If you can't understand every line, reach out to me and
-     ask (6178 folk: find me in the room or on slack).
+     ask (6178 folk: find me in the room or on slack).  One rule of
+     thumb I apply to learning new things (be it code, math, physics,
+     whatever) is to break apart each line to the pieces I do
+     understand.  Many times a single line of code or a single
+     equation only looks daunting when you think about it as a whole,
+     but less so after you concentrate on each piece.
 
 2. Add a new monster to the potential battles
    - Give it new powers (hp and attack damage)
